@@ -53,12 +53,15 @@ public class Paddle : MonoBehaviour {
     }
 
     private System.Collections.IEnumerator PowerupRoutine(PowerupType type) {
-        if (type == PowerupType.SpeedBoost) {
-            _currentMoveSpeed = BaseMoveSpeed * 2f;
-            meshRenderer.material.color = Color.blue;
-        } else if (type == PowerupType.DoublePoints) {
-            IsDoublePointsActive = true;
-            meshRenderer.material.color = Color.red;
+        switch(type) {
+            case PowerupType.SpeedBoost:
+                _currentMoveSpeed = BaseMoveSpeed * 2f;
+                meshRenderer.material.color = Color.blue;
+                break;
+            case PowerupType.DoublePoints:
+                IsDoublePointsActive = true;
+                meshRenderer.material.color = Color.red;
+                break;
         }
 
         yield return new WaitForSeconds(10f);
@@ -70,10 +73,13 @@ public class Paddle : MonoBehaviour {
 
     private void OnJump(InputValue value) {
         if(Score.GameStarted) return;
-        
-        // Only the serving paddle can launch the ball
-        if(Score.PlayerAServing && transform.position.x > 0) return;
-        if(!Score.PlayerAServing && transform.position.x < 0) return;
+
+        switch(Score.PlayerAServing) {
+            // Only the serving paddle can launch the ball
+            case true when transform.position.x > 0:
+            case false when transform.position.x < 0:
+                return;
+        }
 
         // Launch the ball
         Score.GameStarted = true;

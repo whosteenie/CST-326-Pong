@@ -14,11 +14,11 @@ public class PowerupSpawner : MonoBehaviour {
     }
 
     private void SpawnPowerup() {
-        GameObject prefab = Random.value > 0.5f ? speedPowerupPrefab : doublePointsPowerupPrefab;
-        float x = Random.value > 0.5f ? xLeft : xRight;
-        float z = Random.Range(-zRange, zRange);
+        var prefab = Random.value > 0.5f ? speedPowerupPrefab : doublePointsPowerupPrefab;
+        var x = Random.value > 0.5f ? xLeft : xRight;
+        var z = Random.Range(-zRange, zRange);
         
-        Vector3 spawnPos = new Vector3(x, 0.5f, z);
+        var spawnPos = new Vector3(x, 0.5f, z);
         Instantiate(prefab, spawnPos, Quaternion.identity);
     }
 }

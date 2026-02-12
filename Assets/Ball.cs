@@ -31,10 +31,10 @@ public class Ball : MonoBehaviour {
         var normal = other.contacts[0].normal;
         rb.linearVelocity = Vector3.Reflect(rb.linearVelocity, normal);
 
-        if(other.gameObject.CompareTag("Player")) {
-            audioSource.pitch = basePitch + (_currentSpeed - initialSpeed) * pitchMultiplier;
-            audioSource.Play();
-        }
+        // Audio feedback only for paddle collisions
+        if(!other.gameObject.CompareTag("Player")) return;
+        audioSource.pitch = basePitch + (_currentSpeed - initialSpeed) * pitchMultiplier;
+        audioSource.Play();
     }
 
     public void Serve(Vector3 direction) {
