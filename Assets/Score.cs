@@ -35,12 +35,16 @@ public class Score : MonoBehaviour {
             other.gameObject.SetActive(false);
 
             if(gameObject.CompareTag("WallA")) {
-                _scoreB++;
+                var paddleB = playerB.GetComponent<Paddle>();
+                var increment = (paddleB != null && paddleB.IsDoublePointsActive) ? 2 : 1;
+                _scoreB += increment;
                 player = "B";
                 PlayerAServing = true;
                 StartCoroutine(HighlightScore(_scoreBLabel));
             } else if(gameObject.CompareTag("WallB")) {
-                _scoreA++;
+                var paddleA = playerA.GetComponent<Paddle>();
+                var increment = (paddleA != null && paddleA.IsDoublePointsActive) ? 2 : 1;
+                _scoreA += increment;
                 player = "A";
                 PlayerAServing = false;
                 StartCoroutine(HighlightScore(_scoreALabel));

@@ -5,8 +5,19 @@ public class Paddle : MonoBehaviour {
     [SerializeField] private GameObject ball;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float maxLaunchAngle = 45f;
+    [SerializeField] private MeshRenderer meshRenderer;
 
-    private const float MoveSpeed = 25f;
+    private const float BaseMoveSpeed = 25f;
+    private float _currentMoveSpeed = BaseMoveSpeed;
+    private Color _originalColor;
+
+    public bool IsDoublePointsActive { get; private set; }
+
+    private void Start() {
+        if (meshRenderer != null) {
+            _originalColor = meshRenderer.material.color;
+        }
+    }
 
     private void Update() {
         var direction = 0f;
@@ -33,7 +44,28 @@ public class Paddle : MonoBehaviour {
 
         var move = new Vector3(0, 0, direction);
 
-        rb.linearVelocity = move * MoveSpeed;
+        rb.linearVelocity = move * _currentMoveSpeed;
+    }
+
+    public void ActivatePowerup(PowerupType type) {
+        StopAllCoroutines();
+        StartCoroutine(PowerupRoutine(type));
+    }
+
+    private System.Collections.IEnumerator PowerupRoutine(PowerupType type) {
+        if (type == PowerupType.SpeedBoost) {
+            _currentMoveSpeed = BaseMoveSpeed * 2f;
+            meshRenderer.material.color = Color.blue;
+        } else if (type == PowerupType.DoublePoints) {
+            IsDoublePointsActive = true;
+            meshRenderer.material.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(10f);
+
+        _currentMoveSpeed = BaseMoveSpeed;
+        IsDoublePointsActive = false;
+        meshRenderer.material.color = _originalColor;
     }
 
     private void OnJump(InputValue value) {

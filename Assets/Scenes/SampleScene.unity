@@ -119,6 +119,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &181316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 181317}
+  - component: {fileID: 181318}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &181317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181316}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &181318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc7a1e3842573545aa636e089e3b3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PowerupSpawner
+  speedPowerupPrefab: {fileID: 7521008326683170231, guid: d96cd42a2844c0744a7d4dff0e885207, type: 3}
+  doublePointsPowerupPrefab: {fileID: 563432198065633022, guid: 9fa3e34ac1620d6408b4a05e1b03dfa3, type: 3}
+  spawnInterval: 5
+  zRange: 30
+  xLeft: -32.45
+  xRight: 32.27
 --- !u!1 &10348798
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +297,8 @@ MonoBehaviour:
   playerA: {fileID: 107445151}
   playerB: {fileID: 1912362286}
   uiDocument: {fileID: 1058286893}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightDuration: 0.5
 --- !u!1 &17751106
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +542,7 @@ MonoBehaviour:
   ball: {fileID: 1309125862}
   rb: {fileID: 107445158}
   maxLaunchAngle: 45
+  meshRenderer: {fileID: 107445153}
 --- !u!114 &107445157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +728,8 @@ MonoBehaviour:
   playerA: {fileID: 107445151}
   playerB: {fileID: 1912362286}
   uiDocument: {fileID: 1058286893}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  highlightDuration: 0.5
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1368,8 @@ MonoBehaviour:
   initialSpeed: 25
   speedIncrement: 1
   audioSource: {fileID: 1309125869}
+  basePitch: 1
+  pitchMultiplier: 0.05
 --- !u!82 &1309125869
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1540,6 +1597,7 @@ MonoBehaviour:
   ball: {fileID: 1309125862}
   rb: {fileID: 1912362293}
   maxLaunchAngle: 45
+  meshRenderer: {fileID: 1912362288}
 --- !u!114 &1912362292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1611,3 +1669,4 @@ SceneRoots:
   - {fileID: 17751110}
   - {fileID: 517882352}
   - {fileID: 1058286894}
+  - {fileID: 181317}
