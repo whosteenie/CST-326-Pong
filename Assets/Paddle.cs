@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Paddle : MonoBehaviour {
     [SerializeField] private GameObject ball;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float maxLaunchAngle = 45f;
 
     private const float MoveSpeed = 25f;
 
@@ -37,10 +38,10 @@ public class Paddle : MonoBehaviour {
 
     private void OnJump(InputValue value) {
         if(Score.GameStarted) return;
-        if(Score.PlayerAServing && transform.position.x < 0) {
-            // Right paddle serving
-            return;
-        }
+        
+        // Only the serving paddle can launch the ball
+        if(Score.PlayerAServing && transform.position.x > 0) return;
+        if(!Score.PlayerAServing && transform.position.x < 0) return;
 
         // Launch the ball
         Score.GameStarted = true;
@@ -50,7 +51,9 @@ public class Paddle : MonoBehaviour {
         var rbBall = ball.GetComponent<Rigidbody>();
         rbBall.isKinematic = false;
 
-        var direction = ball.transform.position.x > 0 ? Vector3.left : Vector3.right;
-        ball.GetComponent<Ball>().Serve(direction);
+        var baseDirection = ball.transform.position.x > 0 ? Vector3.left : Vector3.right;
+        var randomAngle = Random.Range(-maxLaunchAngle, maxLaunchAngle);
+        var launchDirection = Quaternion.Euler(0, randomAngle, 0) * baseDirection;
+        ball.GetComponent<Ball>().Serve(launchDirection);
     }
 }

@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float speedIncrement = 1f;
 
     private float _currentSpeed;
+    
+    [SerializeField] private AudioSource audioSource;
 
     private void Start() {
         _currentSpeed = initialSpeed;
@@ -26,6 +28,10 @@ public class Ball : MonoBehaviour {
 
         var normal = other.contacts[0].normal;
         rb.linearVelocity = Vector3.Reflect(rb.linearVelocity, normal);
+
+        if(other.gameObject.CompareTag("Player")) {
+            audioSource.Play();
+        }
     }
 
     public void Serve(Vector3 direction) {
