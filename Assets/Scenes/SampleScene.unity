@@ -166,7 +166,7 @@ MonoBehaviour:
   speedPowerupPrefab: {fileID: 7521008326683170231, guid: d96cd42a2844c0744a7d4dff0e885207, type: 3}
   doublePointsPowerupPrefab: {fileID: 563432198065633022, guid: 9fa3e34ac1620d6408b4a05e1b03dfa3, type: 3}
   spawnInterval: 5
-  zRange: 30
+  zRange: 25
   xLeft: -32.45
   xRight: 32.27
 --- !u!1 &10348798
