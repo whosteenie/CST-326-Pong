@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour {
     private float _currentSpeed;
     
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float basePitch = 1f;
+    [SerializeField] private float pitchMultiplier = 0.05f;
 
     private void Start() {
         _currentSpeed = initialSpeed;
@@ -30,6 +32,7 @@ public class Ball : MonoBehaviour {
         rb.linearVelocity = Vector3.Reflect(rb.linearVelocity, normal);
 
         if(other.gameObject.CompareTag("Player")) {
+            audioSource.pitch = basePitch + (_currentSpeed - initialSpeed) * pitchMultiplier;
             audioSource.Play();
         }
     }
