@@ -1,5 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:Label text="0 : 0" name="scoreLabel" style="-unity-text-align: middle-center; color: rgb(255, 255, 255); height: 254px; font-size: 247px; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;);"/>
+    <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: flex-start; flex-direction: row-reverse;">
+        <ui:Label text="0" name="scoreBLabel" style="-unity-text-align: middle-left; color: rgb(255, 255, 255); font-size: 247px; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); flex-grow: 1; height: 100%; flex-direction: column;"/>
+        <ui:Label text=":" style="-unity-text-align: lower-center; color: rgb(255, 255, 255); font-size: 247px; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); height: 100%; margin-left: 30px; margin-right: 30px;"/>
+        <ui:Label text="0" name="scoreALabel" style="-unity-text-align: middle-right; color: rgb(255, 255, 255); font-size: 247px; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); flex-grow: 1; height: 100%;"/>
     </ui:VisualElement>
 </ui:UXML>

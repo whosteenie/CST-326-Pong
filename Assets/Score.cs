@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class Score : MonoBehaviour {
     private static int _scoreA;
@@ -12,13 +13,19 @@ public class Score : MonoBehaviour {
     private const float ServePositionB = 2f;
 
     [SerializeField] private UIDocument uiDocument;
-    private Label _scoreLabel;
+    private Label _scoreALabel;
+    private Label _scoreBLabel;
+
+    [SerializeField] private Color highlightColor = Color.yellow;
+    [SerializeField] private float highlightDuration = 0.5f;
 
     public static bool GameStarted { get; set; }
     public static bool PlayerAServing { get; private set; } = true;
 
     private void Awake() {
-        _scoreLabel = uiDocument.rootVisualElement.Q<Label>("scoreLabel");
+        var root = uiDocument.rootVisualElement;
+        _scoreALabel = root.Q<Label>("scoreALabel");
+        _scoreBLabel = root.Q<Label>("scoreBLabel");
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -31,10 +38,12 @@ public class Score : MonoBehaviour {
                 _scoreB++;
                 player = "B";
                 PlayerAServing = true;
+                StartCoroutine(HighlightScore(_scoreBLabel));
             } else if(gameObject.CompareTag("WallB")) {
                 _scoreA++;
                 player = "A";
                 PlayerAServing = false;
+                StartCoroutine(HighlightScore(_scoreALabel));
             }
         }
 
@@ -51,7 +60,16 @@ public class Score : MonoBehaviour {
     }
 
     private void UpdateScoreUI() {
-        _scoreLabel.text = $"{_scoreB} : {_scoreA}";
+        if(_scoreALabel != null) _scoreALabel.text = _scoreA.ToString();
+        if(_scoreBLabel != null) _scoreBLabel.text = _scoreB.ToString();
+    }
+
+    private IEnumerator HighlightScore(Label label) {
+        if(label == null) yield break;
+        
+        label.style.color = highlightColor;
+        yield return new WaitForSeconds(highlightDuration);
+        label.style.color = Color.white;
     }
 
     private void RespawnBall(GameObject ball, string playerWhoScored) {
